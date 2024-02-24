@@ -1,4 +1,4 @@
-INSERT INTO department (id, deptartment_name)
+INSERT INTO department (id, name)
 VALUES 
 (1, 'Sales'),
 (2, 'Marketing'),
@@ -18,7 +18,7 @@ VALUES
 (3, 'HR Manager', 70000, 3),
 (4, 'Financial Analyst', 65000, 4),
 (5, 'IT Specialist', 70000, 5),
-(6, 'Customer Service Representative', 45000, 6),
+(6, 'Customer Service', 45000, 6),
 (7, 'Research Scientist', 80000, 7),
 (8, 'Operations Manager', 75000, 8),
 (9, 'Legal Counsel', 90000, 9),
@@ -35,4 +35,14 @@ VALUES
 (7, 'Daniel', 'Miller', 7, 6),
 (8, 'Emma', 'Wilson', 8, 6),
 (9, 'Matthew', 'Taylor', 9, 6),
-(10, 'Olivia', 'Moore', 10, 6);
+(10, 'Olivia', 'Moore', 10, 6),
+(11, 'William', 'Anderson', 1, 1),
+(12, 'Sophia', 'Martinez', 2, 2),
+(13, 'James', 'Garcia', 3, 3),
+(14, 'Charlotte', 'Hernandez', 4, 3),
+(15, 'Benjamin', 'Lopez', 5, 3),
+(16, 'Amelia', 'Young', 6, 3),
+(17, 'Ethan', 'Scott', 7, 6),
+(18, 'Evelyn', 'Clark', 8, 6),
+(19, 'Alexander', 'King', 9, 6),
+(20, 'Avery', 'Lee', 10, 6);
