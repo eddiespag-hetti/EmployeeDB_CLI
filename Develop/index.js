@@ -23,15 +23,15 @@ const promptUser = () => {
           "View all Employees",
           "View all Departments",
           "View all Roles",
-          "Add Department",
-          "Add Role",
           "Add Employee",
+          "Add Role",
+          "Add Department",
           "Update Employee Role",
           "Quit",
         ],
       },
     ])
-
+// .then() for handling all user selections that call related functions
     .then((userChoice) => {
       console.log(userChoice);
       if (userChoice.view_options === "View all Employees") {
@@ -49,6 +49,25 @@ const promptUser = () => {
       if (userChoice.view_options === "Add Employee") {
         addEmployee();
       }
+
+      if (userChoice.view_options === "Add Role") {
+        addRole();
+      }
+
+      if (userChoice.view_options === "Add Department") {
+        addDepartment();
+      }
+
+      if (userChoice.view_options === "Add Employee Role") {
+        addEmployeeRole();
+      }
+
+      if (userChoice.view_options === "Quit") {
+        quitApplication();
+      }
+
+
+
     });
 };
 
@@ -111,7 +130,7 @@ const addEmployee = () => {
       },  
     
   ]).then((answers) => {
-    
+
   })
 };
 

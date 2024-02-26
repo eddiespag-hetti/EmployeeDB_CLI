@@ -25,7 +25,7 @@ To install this application, from your browser navigate to -
 
 - https://github.com/eddiespag-hetti/EmployeeDB_CLI 
 
-Clone done the code and open with your chosen code editer. Open up a intergrated terminal window fro the root 'Develop' folder. Once there you need to run 'npm install'. This will install the application allowing you to run 'npm start' to begin querying the database.
+Clone down the code from the GitHub repository then open with your chosen code editer. Open an intergrated terminal window from the root 'Develop' folder. Once there you need to run 'npm install'. This will install the application allowing you to run 'npm start' to begin querying the database.
 
 Follow the prompts in the main menu to carry out your desired tasks.
 
