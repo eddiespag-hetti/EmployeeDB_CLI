@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
-require("dotenv").config();
+require("console.table");
 const db = mysql.createConnection(
   {
     host: "localhost",
@@ -107,6 +107,8 @@ const viewAllRoles = () => {
 };
 
 const addEmployee = () => {
+
+    db.query(`SELECT * FROM roles`)
   inquirer.prompt([
     {
       type: "input",
@@ -126,7 +128,7 @@ const addEmployee = () => {
       {
         type: "input",
         name: "which_manager",
-        message: "What is their current manager?",
+        message: "Who is their current manager?",
       },  
     
   ]).then((answers) => {
