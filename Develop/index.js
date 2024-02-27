@@ -1,6 +1,22 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
 require("console.table");
+
+const figlet = require("figlet");
+
+function renderFiglet(callback) {
+  figlet("Employee DB", function (err, data) {
+    if (err) {
+      console.log("Something went wrong...");
+      console.dir(err);
+      return;
+    }
+    console.log(data);
+    callback();
+  });
+}
+
+
 const db = mysql.createConnection(
   {
     host: "localhost",
@@ -72,15 +88,38 @@ const promptUser = () => {
   );
 };
 
-const init = () => {
-  promptUser();
+function init() {
+  renderFiglet(promptUser);
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+function insertEmployee(employeeData) {
+  db.query(`INSERT INTO employee`, employeeData, (err, result) => {
+    
+    // Error handler
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    console.log("Employee added successfully!");
+    promptUser(); 
+  });
+}
+
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Functions for all user selections
 const viewALLEmp = () => {
-  db.query(`SELECT * FROM employee`, (err, result) => {
+  db.query(`SELECT * FROM employees`, (err, result) => {
     if (err) {
       console.log(err);
     }
@@ -112,14 +151,14 @@ const viewAllRoles = () => {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 function addEmployee() {
-  db.query(`SELECT id, title FROM role`, (err, result) => {
+  db.query(`SELECT id, title FROM role`, (err, roles) => {
     if (err) {
       console.log(err);
       return;
     }
 
     // Extract the relevant role titles from the result to use in inquirer 'choices'
-    const roleChoices = roles.map((role) => ({
+    const roleChoices = roles.map(role => ({
       name: role.title,
       value: role.id,
     }));
@@ -131,7 +170,9 @@ function addEmployee() {
 function getManagers(roleChoices) {
   // Query db to get available managers
   db.query(
-    `SELECT id, CONCAT(first_name, ' ', last_name) AS manager FROM employee`,
+
+    ///////// Need to correct this query string //////////////////////////
+    `SELECT id`,
     (err, managers) => {
       // Error handler
       if (err) {
@@ -153,23 +194,23 @@ function promptEmployeeDetails(roleChoices, managerChoices) {
     .prompt([
       {
         type: "input",
-        name: "firstname",
+        name: "first_name",
         message: "What is their first name?",
       },
       {
         type: "input",
-        name: "lastname",
+        name: "last_name",
         message: "What is their last name?",
       },
       {
         type: "list",
-        name: "what_role",
+        name: "role_id",
         message: "What is their current role?",
         choices: roleChoices,
       },
       {
         type: "list",
-        name: "which_manager",
+        name: "manager_id",
         message: "Who is their current manager?",
         choices: managerChoices,
       },
