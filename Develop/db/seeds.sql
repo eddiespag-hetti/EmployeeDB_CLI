@@ -24,7 +24,7 @@ VALUES
 (9, 'Legal Counsel', 90000, 9),
 (10, 'Administrative Assistant', 40000, 10);
 
-INSERT INTO employee (id, first_name, last_name, role_id, manager_id) 
+INSERT INTO employees (id, first_name, last_name, role_id, manager_id) 
 VALUES
 (1, 'John', 'Doe', 1, NULL),
 (2, 'Jane', 'Smith', 2, NULL),
