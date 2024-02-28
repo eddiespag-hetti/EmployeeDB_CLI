@@ -1,22 +1,11 @@
 // Requiring neccesary libraries
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
+const renderFiglet = require("./renderFiglet");
+
 require("console.table");
 
-// npm figlet for rendering logo in CLI
-const figlet = require("figlet");
 
-function renderFiglet(callback) {
-  figlet("Employee Tracker DB", function (err, data) {
-    if (err) {
-      console.log("Something went wrong...");
-      console.dir(err);
-      return;
-    }
-    console.log(data);
-    callback();
-  });
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -96,18 +85,21 @@ function init() {
   renderFiglet(promptUser);
 }
 
+
+ 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Insert Role Function in roles table
 function insertRole(roleData) {
   db.query(
-    `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?, ?)`,
-      [roleData.title, roleData.salary, roleData.department_id],
+    `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`,
+    [roleData.title, roleData.salary, roleData.department_id],
     (err, result) => {
       if (err) {
         console.log("There was an error adding role:", err);
       } else {
         console.log("Role successfully added!");
+        promptUser(); // Continue interaction with prompts
       }
     }
   );
@@ -132,7 +124,7 @@ function insertEmployee(employeeData) {
       }
 
       console.log("Employee added successfully!");
-      promptUser(); // Continue interaction
+      promptUser(); // Continue interaction with prompts
     }
   );
 }

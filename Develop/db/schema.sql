@@ -11,10 +11,10 @@ name VARCHAR(30) NOT NULL
 
 
 CREATE TABLE roles (
-id INT NOT NULL PRIMARY KEY,
+id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 title VARCHAR(30),
 salary DECIMAL,
-department_id INT,
+department_id INT DEFAULT 0,
 FOREIGN KEY (department_id) REFERENCES department(id)
 ON DELETE SET NULL
 );
