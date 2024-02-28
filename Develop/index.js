@@ -225,17 +225,72 @@ function promptEmployeeDetails(roleChoices, managerChoices) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+function addRole() {
+  db.query(`SELECT id, name FROM department`, (err, department) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    
+    const departmentChoices = department.map((department) => ({
+      name: department.name,
+      value: department.id,
+    }));
+    promptGetRoleDetails(departmentChoices);
+  });
+    
+  function promptGetRoleDetails(departmentChoices) {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "title",
+          message: "What is the title of the role?",
+        },
+        {
+          type: "input",
+          name: "salary",
+          message: "What is their yearly salary?",
+        },
+        {
+          type: "list",
+          name: "department",
+          message: "Which department will hold the role?",
+          choices: departmentChoices,
+        },
+      ])
+      .then((answers) => {
+        // Once user input is recieved - insert into roles functions is called
+        insertRole(answers);
+      })
+      .catch((error) => {
+        console.log("An error has occured:", error);
+      });
+  }
+
+  function insertRole(roleData) {
+    db.query(
+      `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?, ?)`
+    
+      [roleData.title, roleData.salary, roleData.department_id],
+      (err, result) => {
+        if (err) {
+          console.log("There was an error adding role:", err);
+        } else {
+          console.log("Role successfully added!");
+        }
+      }
+  )}
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 function quitApplication() {
   console.log("Exiting the application..");
-  process.exit(0) // Exit the process with 'process.exit(0)' '0' as a success status code
+  process.exit(0); // Exit the process with 'process.exit(0)' '0' as a success status code
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
 // Initilise Function()
 init();
