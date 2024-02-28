@@ -25,7 +25,7 @@ const db = mysql.createConnection(
     password: "_3ddiE7689",
     database: "employeeTracker_db",
   },
-  console.log(`Connected to the courses_db database.`)
+  console.log(`Connected to the Employee Tracker DB database.`)
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,19 +97,20 @@ function init() {
 
 
 function insertEmployee(employeeData) {
-  db.query(`INSERT INTO employee`, employeeData, (err, result) => {
-    
-    // Error handler
-    if (err) {
-      console.log(err);
-      return;
+  db.query(
+    `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`,
+    [employeeData.first_name, employeeData.last_name, employeeData.role_id, employeeData.manager_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      console.log("Employee added successfully!");
+      promptUser(); // Continue interaction
     }
-
-    console.log("Employee added successfully!");
-    promptUser(); 
-  });
+  );
 }
-
 
 
 
@@ -172,7 +173,7 @@ function getManagers(roleChoices) {
   db.query(
 
     ///////// Need to correct this query string //////////////////////////
-    `SELECT id`,
+    `SELECT DISTINCT id, first_name, last_name FROM employees WHERE manager_id IS NULL`,
     (err, managers) => {
       // Error handler
       if (err) {
@@ -180,7 +181,7 @@ function getManagers(roleChoices) {
         return;
       }
       const managerChoices = managers.map((manager) => ({
-        name: manager.manager,
+        name: `${manager.first_name} ${manager.last_name}`,
         value: manager.id,
       }));
 
