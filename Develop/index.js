@@ -1,11 +1,13 @@
+// Requiring neccesary libraries
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
 require("console.table");
 
+// npm figlet for rendering logo in CLI
 const figlet = require("figlet");
 
 function renderFiglet(callback) {
-  figlet("Employee DB", function (err, data) {
+  figlet("Employee Tracker DB", function (err, data) {
     if (err) {
       console.log("Something went wrong...");
       console.dir(err);
@@ -16,12 +18,13 @@ function renderFiglet(callback) {
   });
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Create a connection to the Database
 const db = mysql.createConnection(
   {
     host: "localhost",
     user: "root",
-    // MySQL password
     password: "_3ddiE7689",
     database: "employeeTracker_db",
   },
@@ -30,6 +33,7 @@ const db = mysql.createConnection(
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Displays main ment questions to recieve user input
 const promptUser = () => {
   return (
     inquirer
@@ -90,16 +94,19 @@ const promptUser = () => {
 
 function init() {
   renderFiglet(promptUser);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 function insertEmployee(employeeData) {
   db.query(
     `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`,
-    [employeeData.first_name, employeeData.last_name, employeeData.role_id, employeeData.manager_id],
+    [
+      employeeData.first_name,
+      employeeData.last_name,
+      employeeData.role_id,
+      employeeData.manager_id,
+    ],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -111,10 +118,6 @@ function insertEmployee(employeeData) {
     }
   );
 }
-
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -159,7 +162,7 @@ function addEmployee() {
     }
 
     // Extract the relevant role titles from the result to use in inquirer 'choices'
-    const roleChoices = roles.map(role => ({
+    const roleChoices = roles.map((role) => ({
       name: role.title,
       value: role.id,
     }));
@@ -171,8 +174,6 @@ function addEmployee() {
 function getManagers(roleChoices) {
   // Query db to get available managers
   db.query(
-
-    ///////// Need to correct this query string //////////////////////////
     `SELECT DISTINCT id, first_name, last_name FROM employees WHERE manager_id IS NULL`,
     (err, managers) => {
       // Error handler
@@ -223,6 +224,18 @@ function promptEmployeeDetails(roleChoices, managerChoices) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+function quitApplication() {
+  console.log("Exiting the application..");
+  process.exit(0) // Exit the process with 'process.exit(0)' '0' as a success status code
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 
 // Initilise Function()
 init();

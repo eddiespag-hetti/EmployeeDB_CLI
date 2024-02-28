@@ -27,9 +27,42 @@ To install this application, from your browser navigate to -
 
 Clone down the code from the GitHub repository then open with your chosen code editer. Open an intergrated terminal window from the root 'Develop' folder. Once there you need to run 'npm install'. This will install the application allowing you to run 'npm start' to begin querying the database.
 
+Please see provided video walk-through below:
+
+-- link here --
+
 Follow the prompts in the main menu to carry out your desired tasks.
 
 # Usage 
+
+Interact with the Application:
+
+Upon running the application, you will be presented with a list of options to perform various actions, such as viewing employees, departments, roles, adding new employees, etc.
+Follow the on-screen prompts to navigate through the application and perform desired actions.
+Quit the Application:
+
+For example: 
+
+![Alt](/Develop/img/Screenshot-01.png)
+
+
+![Alt](/Develop/img/Screenshot-02.png)
+
+
+![Alt](/Develop/img/Screenshot-03.png)
+
+
+![Alt](/Develop/img/Screenshot-04.png)
+
+
+
+
+To quit the application, select the "Quit" option from the main menu.
+
+
+
+
+
 
 # Features
 
@@ -50,4 +83,16 @@ https://opensource.org/license/mit
 
 # Contributions
 
+Here at EmployeeDB_CLI we encourage interation, feedback and contributions. To provide any feedback or have an questions please refer to the contact information below. 
+
+If you have any developement contributions or ideas for future developement please do a 'pull request'. Thank you for using this application!
+
 # Contact
+
+GitHub Repository:
+
+- https://github.com/eddiespag-hetti/EmployeeDB_CLI
+
+Email: 
+
+- eddie_p89@hotmail.com
