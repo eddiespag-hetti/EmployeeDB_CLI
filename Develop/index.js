@@ -140,7 +140,7 @@ const viewAllDepartments = () => {
 };
 
 const viewAllRoles = () => {
-  db.query(`SELECT * FROM role`, (err, result) => {
+  db.query(`SELECT * FROM roles`, (err, result) => {
     if (err) {
       console.log(err);
     }
@@ -152,7 +152,7 @@ const viewAllRoles = () => {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 function addEmployee() {
-  db.query(`SELECT id, title FROM role`, (err, roles) => {
+  db.query(`SELECT id, title FROM roles`, (err, roles) => {
     if (err) {
       console.log(err);
       return;
