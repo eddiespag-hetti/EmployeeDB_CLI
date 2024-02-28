@@ -29,7 +29,7 @@ Clone down the code from the GitHub repository then open with your chosen code e
 
 Please see provided video walk-through below:
 
--- link here --
+- https://drive.google.com/file/d/16x65wytCr6U32BNGkC0CQjk5wMclesAv/view 
 
 Follow the prompts in the main menu to carry out your desired tasks.
 
