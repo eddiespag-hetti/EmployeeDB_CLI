@@ -98,6 +98,24 @@ function init() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Insert Role Function in roles table
+function insertRole(roleData) {
+  db.query(
+    `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?, ?)`,
+      [roleData.title, roleData.salary, roleData.department_id],
+    (err, result) => {
+      if (err) {
+        console.log("There was an error adding role:", err);
+      } else {
+        console.log("Role successfully added!");
+      }
+    }
+  );
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Insert employee into employee table
 function insertEmployee(employeeData) {
   db.query(
     `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`,
@@ -231,14 +249,14 @@ function addRole() {
       console.log(err);
       return;
     }
-    
+
     const departmentChoices = department.map((department) => ({
       name: department.name,
       value: department.id,
     }));
     promptGetRoleDetails(departmentChoices);
   });
-    
+
   function promptGetRoleDetails(departmentChoices) {
     inquirer
       .prompt([
@@ -267,22 +285,8 @@ function addRole() {
         console.log("An error has occured:", error);
       });
   }
-
-  function insertRole(roleData) {
-    db.query(
-      `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?, ?)`
-    
-      [roleData.title, roleData.salary, roleData.department_id],
-      (err, result) => {
-        if (err) {
-          console.log("There was an error adding role:", err);
-        } else {
-          console.log("Role successfully added!");
-        }
-      }
-  )}
-
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 function quitApplication() {
